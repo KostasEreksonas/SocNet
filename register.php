@@ -117,7 +117,11 @@ if (isset($_POST['register_button'])) {
             $profile_pic = "assets/images/profile_pics/defaults/head_emerald.jpg";
         }
 
-        $query = mysqli_query($con, "INSERT INTO users VALUES (NULL, '$fname', '$lname', '$username', '$email', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')");
+        try {
+            $query = mysqli_query($con, "INSERT INTO users VALUES (NULL, '$fname', '$lname', '$username', '$email', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')");
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
         array_push($error_array, "<span style='color: #14C800'>You're all set! Go ahead and login!</span><br>");
 
         // Clear session variables
