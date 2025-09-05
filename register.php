@@ -43,7 +43,7 @@ require 'includes/form_handlers/login_handler.php';
             <br>
             <input type="submit" name="login_button" value="Login">
             <br>
-            <a href="#" id="signup" class="signup">Need an account? Register here!</a>
+            <a href="#" id="signup" class="signup">Need an account? Register here!</a><br>
 
             <?php if (in_array("Email or Password is invalid<br>", $error_array)) echo "Email or Password is invalid<br>"; ?>
         </form>

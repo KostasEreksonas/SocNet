@@ -1,14 +1,5 @@
 <?php
-    require 'config/config.php';
+    include("includes/header.php");
 ?>
-
-<html>
-    <head>
-        <title>
-            TITLE
-        </title>
-    </head>
-    <body>
-        Hello World!
     </body>
 </html>
