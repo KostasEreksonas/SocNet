@@ -7,7 +7,7 @@ $(document).ready(function() {
     });
 
     // On click signup, hide registration and show login form
-    $("#signup").click(function() {
+    $("#signin").click(function() {
         $("#second").slideUp("slow", function() {
             $("#first").slideDown("slow");
         });

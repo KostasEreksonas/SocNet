@@ -17,8 +17,9 @@ require 'includes/form_handlers/login_handler.php';
         echo '
         <script>
             $(document).ready(function(){
-               $("#first").hide();
-               $("#second").show();
+               $("#second").slideUp("slow", function() {
+           $("#first").slideDown("slow");
+        });
             });
         </script>
         ';
@@ -31,7 +32,7 @@ require 'includes/form_handlers/login_handler.php';
             <h1>Swirlfeed</h1>
             Login or sign up below
         </div>
-    <div class="first">
+    <div id="first">
         <form action="register.php" method="POST">
             <input type="email" name="log_email" placeholder="Email address" value="<?php
             if (isset($_SESSION['log_email'])){
@@ -47,7 +48,7 @@ require 'includes/form_handlers/login_handler.php';
             <?php if (in_array("Email or Password is invalid<br>", $error_array)) echo "Email or Password is invalid<br>"; ?>
         </form>
     </div>
-    <div class="second">
+    <div id="second">
         <form action="register.php" method="post">
             <input type="text" name="reg_fname" placeholder="First Name" value="<?php
             if (isset($_SESSION['reg_fname'])){
@@ -88,7 +89,7 @@ require 'includes/form_handlers/login_handler.php';
             <input type="submit" name="register_button" value="Register">
             <br>
             <?php if (in_array("<span style='color: #14C800'>You're all set! Go ahead and login!</span><br>", $error_array)) { echo "<span style='color: #14C800'>You're all set! Go ahead and login!</span><br>"; } ?>
-            <a href="#" id="signup" class="signup">Already have an account? Sign in here!</a>
+            <a href="#" id="signin" class="signin">Already have an account? Sign in here!</a>
         </form>
     </div>
     </div>
