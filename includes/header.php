@@ -28,7 +28,7 @@ if (isset($_SESSION['username'])) {
         <a href="index.php">Swirlfeed!</a>
     </div>
     <nav>
-        <a href="">
+        <a href="<?php echo $user_logged_in; ?>">
             <?php echo $user['first_name']; ?>
         </a>
         <a href="">
@@ -46,5 +46,10 @@ if (isset($_SESSION['username'])) {
         <a href="">
             <i class="fa fa-cog fa-lg" aria-hidden="true"></i>
         </a>
+        <a href="includes/handlers/logout.php">
+            <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i>
+        </a>
     </nav>
 </div>
+
+<div class="wrapper">
