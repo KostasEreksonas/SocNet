@@ -27,11 +27,60 @@ if (isset($_POST['post'])) {
         <input type="submit" name="post" id="post_button" value="Post">
         <hr>
     </form>
-    <?php
-        $user_obj = new User($con, $user_logged_in);
-        echo $user_obj->getFirstAndLastName();
-    ?>
+
+    <div class="posts_area">
+
+    </div>
+    <img id="loading" src="assets/images/icons/loading.gif" alt="Loading...">
 </div>
+
+<script>
+    var user_logged_in = '<?php echo $user_logged_in; ?>';
+
+    $(document).ready(function() {
+        $('#loading').show();
+
+        // Original ajax request for loading first posts
+        $.ajax({
+            url: "includes/handlers/ajax_load_posts.php",
+            type: "POST",
+            data: "page=1&user_logged_in=" + user_logged_in,
+            cache:false,
+
+            success: function(data) {
+                $('#loading').hide();
+                $('.posts_area').html(data);
+            }
+        });
+
+        $(window).scroll(function(){
+            var height = $('.posts_area').height(); // Div containing posts
+            var scroll_top = $(this).scrollTop();
+            var page = $('.posts_area').find('.nextPage').val();
+            var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+
+            if ((document.body.scrollHeight == document.body.scrollTop + window.innerHeight) && noMorePosts == 'false') {
+                $('#loading').show();
+
+                var ajaxReq = $.ajax({
+                    url: "includes/handlers/ajax_load_posts.php",
+                    type: "POST",
+                    data: "page=" + page + "&user_logged_in=" + user_logged_in,
+                    cache:false,
+
+                    success: function(response) {
+                        $('.posts_area').find('.nextPage').remove(); // Removes current .nextpage
+                        $('.posts_area').find('.noMorePosts').remove(); // Removes last page
+                        $('#loading').hide();
+                        $('.posts_area').append(response);
+                    }
+                });
+            } // End if
+
+            return false;
+        }); // End (window).scroll(function())
+    });
+</script>
 
 </div>
 </body>
